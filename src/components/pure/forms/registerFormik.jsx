@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 // models
 import { User } from "../../../models/user.class";
 import { ROLES } from '../../../models/roles.enum';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterFormik = () => {
 
@@ -49,9 +51,11 @@ const RegisterFormik = () => {
             }).required('You must confirm the password'),
     })
 
+    const navigate = useNavigate();
+
     return (
-        <div>
-            <h4>Register Formik</h4>
+        <div className='d-flex flex-column'>
+            <h4 className='text-center'>Register Formik</h4>
             <Formik
                 initialValues={initialValues}
 
@@ -62,6 +66,7 @@ const RegisterFormik = () => {
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
                     alert(JSON.stringify(values, null, 2));
+                    navigate('/login');
                 }}
             >
 
@@ -71,7 +76,8 @@ const RegisterFormik = () => {
                     isSubmitting,
                     handleChange,
                     handleBlur }) => (
-                    <Form>
+                    <Form className='d-flex justify-content-center flex-column'> 
+                        
                         <label htmlFor="username">Username: </label>
                         <Field
                             id="username"
@@ -158,7 +164,7 @@ const RegisterFormik = () => {
                         }
 
 
-                        <button type="submit">Register Account</button>
+                        <Button type="submit" color='success' variant='contained' className='my-3'>Register Account</Button>
                         {isSubmitting ? (<p>Sending your credentials...</p>) : null}                        
                     </Form>
                 )}

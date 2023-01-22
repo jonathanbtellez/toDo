@@ -3,15 +3,19 @@ import React from 'react';
 //importando formit para crear los formularios
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
+// importing React-router-dom
+import {useNavigate} from 'react-router-dom';
+
 //importando formit para validar los formularios
 import * as Yup from 'yup';
+import { Button } from '@mui/material';
 /**
  * Usando la libreria formit que nos permite crear componentes en react
  * Ejemplo de creacion de formularioS
  */
 
-// uando Yup para hacer la validacion del formulario
 
+// uando Yup para hacer la validacion del formulario
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().required('Password is required')
@@ -25,9 +29,10 @@ const LoginFormik = () => {
         password: ""
     }
 
+    const navigate = useNavigate();
     return (
         <div>
-            <h4>
+            <h4 className='text-center'>
                 Login Formik
             </h4>
             <Formik
@@ -42,9 +47,9 @@ const LoginFormik = () => {
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
                     alert(JSON.stringify(values, null, 2));
-
                     // We save the data in the localstorage
                     localStorage.setItem('credential', values);
+                    navigate('/dashboard');
                 }}
             >
 
@@ -56,7 +61,7 @@ const LoginFormik = () => {
                     isSubmitting,
                     handleChange,
                     handleBlur }) => (
-                    <Form>
+                    <Form className='d-flex flex-column'>
                         <label htmlFor="email">Email</label>
                         <Field
                             id="email"
@@ -102,7 +107,7 @@ const LoginFormik = () => {
                         }
 
 
-                        <button type="submit">Login</button>
+                        <Button type="submit" variant='contained' color='success' className='my-3'>Login</Button>
                         {isSubmitting ? (<p>Login your credentials...</p>) : null}
                     </Form>
                 )}
