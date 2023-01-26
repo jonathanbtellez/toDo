@@ -8,6 +8,7 @@ const AxiosExampleJoke = () => {
     const [joke, setJoke] = useState(null);
     const [like, setLike] = useState(0);
     const [dislike, setDislike] = useState(0);
+    const [votation, setVotation] = useState(false);
 
     const obtainRandomJoke = () => {
         getRandomJoke()
@@ -17,6 +18,7 @@ const AxiosExampleJoke = () => {
                     console.log(response.data)
                     setJoke(response.data);
                     console.log('user', joke);
+                    setVotation(false);
                 }
             })
             .catch(error => {
@@ -25,11 +27,13 @@ const AxiosExampleJoke = () => {
     }
 
     const goodJoke = () => {
-        setLike(like +1);
+        setLike(like + 1);
+        setVotation(true);
     }
 
     const badJoke = () => {
-        setDislike(dislike+1);
+        setDislike(dislike + 1);
+        setVotation(true);
     }
 
     const ButtonGenerateJoke = () => {
@@ -44,7 +48,33 @@ const AxiosExampleJoke = () => {
         )
     }
 
-
+    const ButtonsVotation = () => {
+        return (
+            <div className='card-footer'>
+            {!votation ? (
+                <div className='d-flex justify-content-evenly mb-3'>
+                    <Button variant='contained'
+                        onClick={goodJoke}
+                        color='success'
+                    ><i className="bi bi-hand-thumbs-up"></i>
+                    </Button>
+                    <Button variant='contained'
+                        onClick={badJoke}
+                        color='error'
+                    ><i className="bi bi-hand-thumbs-down"></i> 
+                    </Button>
+                </div>
+            ) : (
+                <p>You already had voted</p>
+            )
+            }
+                <div className='d-flex justify-content-evenly'>
+                    <span class="badge bg-success">You had liked: {like}</span>
+                    <span class="badge bg-danger">  you had dislike: {dislike}</span>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -55,18 +85,7 @@ const AxiosExampleJoke = () => {
                         <p className='card-title'>{joke.value} </p>
                     </div>
                     <ButtonGenerateJoke />
-                    <div className='card-footer'>
-                        <Button variant='contained'
-                            onClick={goodJoke}
-                            color='success'
-                        ><i className="bi bi-hand-thumbs-up"></i> {like}
-                        </Button> <span>    </span>
-                        <Button variant='contained'
-                            onClick={badJoke}
-                            color='error'
-                        ><i className="bi bi-hand-thumbs-down"></i> {dislike}
-                        </Button>
-                    </div>
+                    <ButtonsVotation />
                 </div>
             ) : (
                 <div>
