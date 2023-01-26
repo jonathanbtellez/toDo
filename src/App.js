@@ -1,10 +1,15 @@
 //import logo from './logo.svg';
 import './App.css';
+import AsyncExample from './components/pure/AsyncExample';
+import AxiosExample from './components/pure/AxiosExample';
+import AxiosExampleJoke from './components/pure/AxiosExampleJoke';
+import FetchExample from './components/pure/FetchExample';
+import ObservableExample from './components/pure/ObservableExample';
 //import { Father } from './components/container/father';
 //import GreetingStyled from './components/pure/GreetingStyled';
 //import Greeting from './components/pure/Greeting';
 //import GreetingFun from './components/pure/GreetingFun';
-import TaskListComponent from './components/container/taskListComponent';
+// import TaskListComponent from './components/container/taskListComponent';
 // import LoginFormik from './components/pure/forms/loginFormik';
 // import RegisterFormik from './components/pure/forms/registerFormik';
 // import OptionalRender from './components/pure/optionalRender';
@@ -62,9 +67,16 @@ function App() {
       {/* <LoginFormik></LoginFormik> */}
       {/* <RegisterFormik></RegisterFormik> */}
 
+      {/* Ejemplos de proceso asincronicos */}
+      {/* <AsyncExample/> */}
+      {/* <ObservableExample/> */}
+      {/* <FetchExample></FetchExample> */}
+      {/* <AxiosExample></AxiosExample> */}
+      <AxiosExampleJoke></AxiosExampleJoke>
+
       {/* ------------------Aplicacion tasklist------------------ */}
       {/* Usando el componente tas list */}
-      <TaskListComponent></TaskListComponent>
+      {/* <TaskListComponent></TaskListComponent> */}
     </div>
   );
 }
